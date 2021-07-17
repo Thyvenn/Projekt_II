@@ -24,13 +24,16 @@ namespace Projekt_II
         private Wypozyczalnia_PlytContext cnt2 = new Wypozyczalnia_PlytContext();
 
         // Retriwuję zaznaczony wiesz z Okna głównego i przypiszę go do formularza usuwania
-        private Tplyty selecteditem = (Tplyty)((MainWindow)Application.Current.MainWindow).List_Plyty.SelectedItem;
+        private Tplyty selecteditem;
         public bool ReTry;
 
         
 
-        public W3()
+        public W3(Tplyty selectPlyta)
         {
+            selecteditem = selectPlyta;
+
+
             InitializeComponent();
             w2_viewModel.VM_Nosnik = cnt2.SlKatNosnikas.ToList();
             w2_viewModel.VM_Muzyka = cnt2.SlkatMuzykis.ToList();
@@ -64,19 +67,20 @@ namespace Projekt_II
 
         private void Btn_usun_Click(object sender, RoutedEventArgs e)
         {
-            var plyta2 = selecteditem;
-            plyta2.Ilosc = w2_viewModel.Wybrana_Ilosc;
+            Tplyty usuwanaPlyta = cnt2.Tplyties.Find(selecteditem.PlytaId);
 
+                
+           
 
-            if (plyta2.Ilosc == selecteditem.Ilosc)
+            if (usuwanaPlyta.Ilosc == w2_viewModel.Wybrana_Ilosc)
             {
 
-             cnt2.Tplyties.Remove(plyta2);
+             cnt2.Tplyties.Remove(usuwanaPlyta);
             }
             else
             {
-                var result = cnt2.Tplyties.SingleOrDefault(b => b.PlytaId == plyta2.PlytaId);
-                result.Ilosc = w2_viewModel.Wybrana_Ilosc;
+             
+                usuwanaPlyta.Ilosc = usuwanaPlyta.Ilosc - w2_viewModel.Wybrana_Ilosc;
               
             }
 
@@ -104,6 +108,7 @@ namespace Projekt_II
 
             if (ReTry == false)
             {
+            new MainWindow().Show();
             this.Close();
 
             }

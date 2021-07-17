@@ -18,6 +18,8 @@ namespace Projekt_II
 
         public List<SlKatNosnika> KatNosnika { get ;  set; }
 
- 
+        
+
+
     }
 }

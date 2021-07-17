@@ -33,21 +33,29 @@ namespace Projekt_II
             w1_viewModel.VM_Wypozyczenium = cnt1.Twypozyczenia.ToList();
            
             // Przypisywanie ID do nazw
-            var nosniki = new Wypozyczalnia_PlytContext().SlKatNosnikas;
-            var muzyki = new Wypozyczalnia_PlytContext().SlkatMuzykis;
+            var nosniki = cnt1.SlKatNosnikas;
+            var muzyki = cnt1.SlkatMuzykis;
             w1_viewModel.VM_Plyty.ForEach(it => it.Nosnik = nosniki.Find(it.NosnikId));
             w1_viewModel.VM_Plyty.ForEach(it => it.Kategoria = muzyki.Find(it.KategoriaId));
+
+            var klienci = cnt1.Tkliencis;
+            var plyty = cnt1.Tplyties;
+            w1_viewModel.VM_Wypozyczenium.ForEach(it => it.Klient = klienci.Find(it.KlientId));
+            w1_viewModel.VM_Wypozyczenium.ForEach(it => it.Plyty = plyty.Find(it.PlytyId));
 
         }
 
         private void Btn_dodaj_w2_Click(object sender, RoutedEventArgs e)
         {
             new W2().Show();
+            this.Close();
         }
 
         private void Btn_usun_w3_Click(object sender, RoutedEventArgs e)
         {
-            new W3().Show();
+            Tplyty selectedPlyta = (Tplyty)List_Plyty.SelectedItem;
+            new W3(selectedPlyta).Show();
+            this.Close();
         }
 
         private void Plyty_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -62,6 +70,7 @@ namespace Projekt_II
         private void Btn_wypo_w4_Click(object sender, RoutedEventArgs e)
         {
             new W4().Show();
+            this.Close();
         }
         private void Btn_oddaj_w5_Click(object sender, RoutedEventArgs e)
         {

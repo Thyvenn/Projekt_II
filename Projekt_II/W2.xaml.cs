@@ -72,6 +72,9 @@ namespace Projekt_II
             cnt1.SaveChanges();
             w1_viewModel.VM_Plyty = new Wypozyczalnia_PlytContext().Tplyties.ToList();
 
+            new MainWindow().Show();
+            this.Close();
+
 
         }
 

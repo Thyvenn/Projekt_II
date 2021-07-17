@@ -72,7 +72,6 @@ namespace Projekt_II
                    var z2 = (Tplyty)List_Plyty.SelectedItem;
                    var z3 = w1_viewModel.VM_Wypozyczenium.Last();
 
-
                     var wypo1 = new Twypozyczenium()
                     {
                         KlientId = z1.KlientId,
@@ -80,7 +79,9 @@ namespace Projekt_II
                         DataWypozyczenia = DateTime.Now
 
                     };
+                    
                     cnt4.Twypozyczenia.Add(wypo1);
+                  //  Console.WriteLine(((ObjectQuery)z6).ToTraceString());
                     cnt4.SaveChanges();
                     w1_viewModel.VM_Wypozyczenium = new Wypozyczalnia_PlytContext().Twypozyczenia.ToList();
                     break;
@@ -97,6 +98,7 @@ namespace Projekt_II
 
             if (ReTry == false)
             {
+                new MainWindow().Show();
                 this.Close();
 
             }
