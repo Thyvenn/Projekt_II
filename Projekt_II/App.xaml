@@ -7,5 +7,17 @@
         <Style TargetType="{x:Type Label}">
             <Setter Property="Control.Foreground" Value="WhiteSmoke"/>
         </Style>
+        
+        <Style TargetType="ListViewItem">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkBlue" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Crimson" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Application.Resources>
 </Application>

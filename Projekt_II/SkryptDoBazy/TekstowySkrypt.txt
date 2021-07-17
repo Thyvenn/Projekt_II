@@ -1,0 +1,292 @@
+USE [master]
+GO
+/****** Object:  Database [Wypozyczalnia_Plyt]    Script Date: 16.07.2021 17:09:18 ******/
+drop database Wypozyczalnia_Plyt
+CREATE DATABASE [Wypozyczalnia_Plyt]
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [Wypozyczalnia_Plyt].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET RECOVERY FULL 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET  MULTI_USER 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'Wypozyczalnia_Plyt', N'ON'
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET QUERY_STORE = OFF
+GO
+USE [Wypozyczalnia_Plyt]
+GO
+/****** Object:  Table [dbo].[SLKat_Muzyki]    Script Date: 16.07.2021 17:09:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SLKat_Muzyki](
+	[KategoriaID] [int] IDENTITY(1,1) NOT NULL,
+	[Nazwa] [varchar](150) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[KategoriaID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SlKat_Nosnika]    Script Date: 16.07.2021 17:09:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SlKat_Nosnika](
+	[NosnikID] [int] IDENTITY(1,1) NOT NULL,
+	[Nazwa] [varchar](150) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[NosnikID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SLPowod]    Script Date: 16.07.2021 17:09:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SLPowod](
+	[PowodID] [int] IDENTITY(1,1) NOT NULL,
+	[Nazwa] [varchar](150) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[PowodID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TKlienci]    Script Date: 16.07.2021 17:09:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TKlienci](
+	[KlientID] [int] IDENTITY(1,1) NOT NULL,
+	[Imie] [varchar](30) NOT NULL,
+	[Nazwisko] [varchar](30) NOT NULL,
+	[Adr_ulica] [varchar](30) NOT NULL,
+	[Adr_nr] [varchar](6) NOT NULL,
+	[Adr_kod] [varchar](9) NOT NULL,
+	[Adr_msc] [varchar](50) NOT NULL,
+	[Telefon] [varchar](9) NULL,
+	[Email] [varchar](30) NULL,
+	[Data_dodania] [date] NOT NULL,
+	[Data_usuniecia] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[KlientID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TPlyty]    Script Date: 16.07.2021 17:09:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TPlyty](
+	[PlytaID] [int] IDENTITY(1,1) NOT NULL,
+	[Autor] [varchar](50) NOT NULL,
+	[Tytul] [varchar](50) NOT NULL,
+	[Data_wydania] [date] NOT NULL,
+	[KategoriaID] [int] NOT NULL,
+	[NosnikID] [int] NOT NULL,
+	[Ilosc] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[PlytaID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TUsuniecia_Plyt]    Script Date: 16.07.2021 17:09:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TUsuniecia_Plyt](
+	[UsunieciaID] [int] IDENTITY(1,1) NOT NULL,
+	[PlytaID] [int] NOT NULL,
+	[Data_usuniecia] [datetime] NOT NULL,
+	[Ilosc_plyt] [int] NOT NULL,
+	[PowodID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[UsunieciaID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TWypozyczenia]    Script Date: 16.07.2021 17:09:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TWypozyczenia](
+	[WypozyczenieID] [int] IDENTITY(1,1) NOT NULL,
+	[KlientID] [int] NOT NULL,
+	[PlytyID] [int] NOT NULL,
+	[Data_wypozyczenia] [datetime] NOT NULL,
+	[Data_zwrotu] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[WypozyczenieID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[SLKat_Muzyki] ON 
+
+INSERT [dbo].[SLKat_Muzyki] ([KategoriaID], [Nazwa]) VALUES (1, N'Metal')
+INSERT [dbo].[SLKat_Muzyki] ([KategoriaID], [Nazwa]) VALUES (2, N'Rock')
+INSERT [dbo].[SLKat_Muzyki] ([KategoriaID], [Nazwa]) VALUES (3, N'Folk Rock')
+INSERT [dbo].[SLKat_Muzyki] ([KategoriaID], [Nazwa]) VALUES (4, N'Pop')
+SET IDENTITY_INSERT [dbo].[SLKat_Muzyki] OFF
+GO
+SET IDENTITY_INSERT [dbo].[SlKat_Nosnika] ON 
+
+INSERT [dbo].[SlKat_Nosnika] ([NosnikID], [Nazwa]) VALUES (1, N'Vinyl')
+INSERT [dbo].[SlKat_Nosnika] ([NosnikID], [Nazwa]) VALUES (2, N'CD')
+INSERT [dbo].[SlKat_Nosnika] ([NosnikID], [Nazwa]) VALUES (3, N'DVD')
+SET IDENTITY_INSERT [dbo].[SlKat_Nosnika] OFF
+GO
+SET IDENTITY_INSERT [dbo].[SLPowod] ON 
+
+INSERT [dbo].[SLPowod] ([PowodID], [Nazwa]) VALUES (1, N'Plyta Skradziona')
+INSERT [dbo].[SLPowod] ([PowodID], [Nazwa]) VALUES (2, N'Plyta Zepsuta')
+SET IDENTITY_INSERT [dbo].[SLPowod] OFF
+GO
+SET IDENTITY_INSERT [dbo].[TKlienci] ON 
+
+INSERT [dbo].[TKlienci] ([KlientID], [Imie], [Nazwisko], [Adr_ulica], [Adr_nr], [Adr_kod], [Adr_msc], [Telefon], [Email], [Data_dodania], [Data_usuniecia]) VALUES (1, N'John', N'Doe', N'Mullerstrasse', N'23', N'34-200', N'Drezno', N'123456789', N'e@mail.com', CAST(N'2077-11-22' AS Date), NULL)
+INSERT [dbo].[TKlienci] ([KlientID], [Imie], [Nazwisko], [Adr_ulica], [Adr_nr], [Adr_kod], [Adr_msc], [Telefon], [Email], [Data_dodania], [Data_usuniecia]) VALUES (2, N'Ian', N'Matejko', N'Hauptstrasse', N'12', N'34-200', N'Munich', N'321456789', N'e2@mail.com', CAST(N'2008-08-22' AS Date), CAST(N'2021-06-10' AS Date))
+INSERT [dbo].[TKlienci] ([KlientID], [Imie], [Nazwisko], [Adr_ulica], [Adr_nr], [Adr_kod], [Adr_msc], [Telefon], [Email], [Data_dodania], [Data_usuniecia]) VALUES (3, N'Ivan', N'Grozny', N'Novigradzka', N'1500', N'34-201', N'Moskau', N'987654321', N'e3@mail.com', CAST(N'2024-01-22' AS Date), NULL)
+SET IDENTITY_INSERT [dbo].[TKlienci] OFF
+GO
+SET IDENTITY_INSERT [dbo].[TPlyty] ON 
+
+INSERT [dbo].[TPlyty] ([PlytaID], [Autor], [Tytul], [Data_wydania], [KategoriaID], [NosnikID], [Ilosc]) VALUES (3, N'Eisbrecher', N'Das Gesetz', CAST(N'2018-06-08' AS Date), 1, 1, 10)
+INSERT [dbo].[TPlyty] ([PlytaID], [Autor], [Tytul], [Data_wydania], [KategoriaID], [NosnikID], [Ilosc]) VALUES (4, N'Unheilig', N'Geboren um zu leben', CAST(N'2010-03-08' AS Date), 2, 1, 20)
+INSERT [dbo].[TPlyty] ([PlytaID], [Autor], [Tytul], [Data_wydania], [KategoriaID], [NosnikID], [Ilosc]) VALUES (1003, N'Dartagnan', N'Seit an Seit', CAST(N'2016-04-02' AS Date), 3, 1, 20)
+INSERT [dbo].[TPlyty] ([PlytaID], [Autor], [Tytul], [Data_wydania], [KategoriaID], [NosnikID], [Ilosc]) VALUES (1007, N'Saltatio Mortis', N'', CAST(N'2016-04-02' AS Date), 1, 1, 15)
+INSERT [dbo].[TPlyty] ([PlytaID], [Autor], [Tytul], [Data_wydania], [KategoriaID], [NosnikID], [Ilosc]) VALUES (1008, N'Falco', N'Der Kommisar', CAST(N'1982-04-02' AS Date), 4, 1, 10)
+INSERT [dbo].[TPlyty] ([PlytaID], [Autor], [Tytul], [Data_wydania], [KategoriaID], [NosnikID], [Ilosc]) VALUES (1014, N'Megumi Nakajima', N'Saturday Night Question', CAST(N'2018-04-09' AS Date), 4, 2, 10)
+INSERT [dbo].[TPlyty] ([PlytaID], [Autor], [Tytul], [Data_wydania], [KategoriaID], [NosnikID], [Ilosc]) VALUES (1015, N'Flow', N'Go', CAST(N'2001-01-09' AS Date), 4, 1, 20)
+SET IDENTITY_INSERT [dbo].[TPlyty] OFF
+GO
+SET IDENTITY_INSERT [dbo].[TUsuniecia_Plyt] ON 
+
+INSERT [dbo].[TUsuniecia_Plyt] ([UsunieciaID], [PlytaID], [Data_usuniecia], [Ilosc_plyt], [PowodID]) VALUES (2, 3, CAST(N'2077-01-01T00:00:00.000' AS DateTime), 10, 1)
+INSERT [dbo].[TUsuniecia_Plyt] ([UsunieciaID], [PlytaID], [Data_usuniecia], [Ilosc_plyt], [PowodID]) VALUES (3, 3, CAST(N'2077-01-01T00:00:00.000' AS DateTime), 10, 1)
+SET IDENTITY_INSERT [dbo].[TUsuniecia_Plyt] OFF
+GO
+SET IDENTITY_INSERT [dbo].[TWypozyczenia] ON 
+
+INSERT [dbo].[TWypozyczenia] ([WypozyczenieID], [KlientID], [PlytyID], [Data_wypozyczenia], [Data_zwrotu]) VALUES (1, 3, 3, CAST(N'2021-02-01T00:00:00.000' AS DateTime), NULL)
+INSERT [dbo].[TWypozyczenia] ([WypozyczenieID], [KlientID], [PlytyID], [Data_wypozyczenia], [Data_zwrotu]) VALUES (2, 3, 3, CAST(N'2021-02-01T00:00:00.000' AS DateTime), NULL)
+INSERT [dbo].[TWypozyczenia] ([WypozyczenieID], [KlientID], [PlytyID], [Data_wypozyczenia], [Data_zwrotu]) VALUES (3, 3, 3, CAST(N'2021-02-01T00:00:00.000' AS DateTime), NULL)
+INSERT [dbo].[TWypozyczenia] ([WypozyczenieID], [KlientID], [PlytyID], [Data_wypozyczenia], [Data_zwrotu]) VALUES (4, 2, 3, CAST(N'2021-02-01T00:00:00.000' AS DateTime), NULL)
+INSERT [dbo].[TWypozyczenia] ([WypozyczenieID], [KlientID], [PlytyID], [Data_wypozyczenia], [Data_zwrotu]) VALUES (5, 2, 3, CAST(N'2021-02-01T00:00:00.000' AS DateTime), NULL)
+INSERT [dbo].[TWypozyczenia] ([WypozyczenieID], [KlientID], [PlytyID], [Data_wypozyczenia], [Data_zwrotu]) VALUES (6, 3, 3, CAST(N'2021-02-01T00:00:00.000' AS DateTime), NULL)
+INSERT [dbo].[TWypozyczenia] ([WypozyczenieID], [KlientID], [PlytyID], [Data_wypozyczenia], [Data_zwrotu]) VALUES (7, 3, 3, CAST(N'2021-02-01T00:00:00.000' AS DateTime), NULL)
+INSERT [dbo].[TWypozyczenia] ([WypozyczenieID], [KlientID], [PlytyID], [Data_wypozyczenia], [Data_zwrotu]) VALUES (8, 1, 3, CAST(N'2021-02-01T00:00:00.000' AS DateTime), NULL)
+INSERT [dbo].[TWypozyczenia] ([WypozyczenieID], [KlientID], [PlytyID], [Data_wypozyczenia], [Data_zwrotu]) VALUES (9, 1, 3, CAST(N'2021-02-01T00:00:00.000' AS DateTime), NULL)
+INSERT [dbo].[TWypozyczenia] ([WypozyczenieID], [KlientID], [PlytyID], [Data_wypozyczenia], [Data_zwrotu]) VALUES (10, 3, 3, CAST(N'2071-02-01T00:00:00.000' AS DateTime), NULL)
+SET IDENTITY_INSERT [dbo].[TWypozyczenia] OFF
+GO
+ALTER TABLE [dbo].[TPlyty]  WITH CHECK ADD FOREIGN KEY([KategoriaID])
+REFERENCES [dbo].[SLKat_Muzyki] ([KategoriaID])
+GO
+ALTER TABLE [dbo].[TPlyty]  WITH CHECK ADD FOREIGN KEY([NosnikID])
+REFERENCES [dbo].[SlKat_Nosnika] ([NosnikID])
+GO
+ALTER TABLE [dbo].[TUsuniecia_Plyt]  WITH CHECK ADD FOREIGN KEY([PlytaID])
+REFERENCES [dbo].[TPlyty] ([PlytaID])
+GO
+ALTER TABLE [dbo].[TUsuniecia_Plyt]  WITH CHECK ADD FOREIGN KEY([PowodID])
+REFERENCES [dbo].[SLPowod] ([PowodID])
+GO
+ALTER TABLE [dbo].[TWypozyczenia]  WITH CHECK ADD FOREIGN KEY([KlientID])
+REFERENCES [dbo].[TKlienci] ([KlientID])
+GO
+ALTER TABLE [dbo].[TWypozyczenia]  WITH CHECK ADD FOREIGN KEY([PlytyID])
+REFERENCES [dbo].[TPlyty] ([PlytaID])
+GO
+ALTER TABLE [dbo].[TKlienci]  WITH CHECK ADD  CONSTRAINT [TKlienci_Du_greater_than_Dd] CHECK  (([Data_usuniecia]>[Data_dodania]))
+GO
+ALTER TABLE [dbo].[TKlienci] CHECK CONSTRAINT [TKlienci_Du_greater_than_Dd]
+GO
+ALTER TABLE [dbo].[TPlyty]  WITH CHECK ADD  CONSTRAINT [Tplyty_ilosc_not_null] CHECK  (([Ilosc]>=(0)))
+GO
+ALTER TABLE [dbo].[TPlyty] CHECK CONSTRAINT [Tplyty_ilosc_not_null]
+GO
+ALTER TABLE [dbo].[TUsuniecia_Plyt]  WITH CHECK ADD  CONSTRAINT [TUsuniecia_Plyt_ilosc_plyt_not_null] CHECK  (([Ilosc_plyt]>=(0)))
+GO
+ALTER TABLE [dbo].[TUsuniecia_Plyt] CHECK CONSTRAINT [TUsuniecia_Plyt_ilosc_plyt_not_null]
+GO
+ALTER TABLE [dbo].[TWypozyczenia]  WITH CHECK ADD  CONSTRAINT [TWypozyczenia_Dz_greater_than_Dw] CHECK  (([Data_zwrotu]>[Data_wypozyczenia]))
+GO
+ALTER TABLE [dbo].[TWypozyczenia] CHECK CONSTRAINT [TWypozyczenia_Dz_greater_than_Dw]
+GO
+USE [master]
+GO
+ALTER DATABASE [Wypozyczalnia_Plyt] SET  READ_WRITE 
+GO

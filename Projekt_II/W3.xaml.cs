@@ -70,8 +70,6 @@ namespace Projekt_II
             Tplyty usuwanaPlyta = cnt2.Tplyties.Find(selecteditem.PlytaId);
 
                 
-           
-
             if (usuwanaPlyta.Ilosc == w2_viewModel.Wybrana_Ilosc)
             {
 

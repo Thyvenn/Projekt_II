@@ -44,6 +44,16 @@ namespace Projekt_II
             w1_viewModel.VM_Wypozyczenium.ForEach(it => it.Plyty = plyty.Find(it.PlytyId));
 
         }
+        private void Plyty_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Btn_usun_w3.IsEnabled = true;
+            Btn_dodaj_nowe_w5.IsEnabled = true;
+
+        }
+        private void L_Wypozyczenia_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Btn_oddaj_w5.IsEnabled = true;
+        }
 
         private void Btn_dodaj_w2_Click(object sender, RoutedEventArgs e)
         {
@@ -57,22 +67,19 @@ namespace Projekt_II
             new W3(selectedPlyta).Show();
             this.Close();
         }
-
-        private void Plyty_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Btn_dodaj_nowe_w5_Click(object sender, RoutedEventArgs e)
         {
-            Btn_usun_w3.IsEnabled = true;
+            Tplyty selectedPlyta = (Tplyty)List_Plyty.SelectedItem;
+            new W5(selectedPlyta).Show();
+            this.Close();
+        }
 
-        }
-        private void L_Wypozyczenia_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Btn_oddaj_w5.IsEnabled = true;
-        }
-        private void Btn_wypo_w4_Click(object sender, RoutedEventArgs e)
+        private void Btn_wypo_Click(object sender, RoutedEventArgs e)
         {
             new W4().Show();
             this.Close();
         }
-        private void Btn_oddaj_w5_Click(object sender, RoutedEventArgs e)
+        private void Btn_oddaj_Click(object sender, RoutedEventArgs e)
         {
 
             // Odawanie płyty
@@ -105,6 +112,5 @@ namespace Projekt_II
 
         }
 
-        
     }
 }

@@ -53,21 +53,6 @@ namespace Projekt_II
                 Ilosc = w2_viewModel.int_ilosc
             };
 
-            /*
-                        var zmn1 = cnt1.Tplyties.Where(x => x.Autor == plyta1.Autor)
-                            .Where(x => x.Tytul == plyta1.Tytul).First();
-
-                        if (zmn1 == null)
-                        {
-
-
-                        }
-                        else
-                        {
-                            zmn1.Ilosc += plyta1.Ilosc;
-                        }
-
-            */
             cnt1.Tplyties.Add(plyta1);
             cnt1.SaveChanges();
             w1_viewModel.VM_Plyty = new Wypozyczalnia_PlytContext().Tplyties.ToList();

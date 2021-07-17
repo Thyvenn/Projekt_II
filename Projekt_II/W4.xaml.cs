@@ -70,18 +70,20 @@ namespace Projekt_II
                   
                    var z1 = (Tklienci)List_Klienci.SelectedItem;
                    var z2 = (Tplyty)List_Plyty.SelectedItem;
-                   var z3 = w1_viewModel.VM_Wypozyczenium.Last();
 
+                    if (z2.Ilosc > 0)
+                    {
+                        z2.Ilosc--;
                     var wypo1 = new Twypozyczenium()
                     {
                         KlientId = z1.KlientId,
                         PlytyId = z2.PlytaId,
                         DataWypozyczenia = DateTime.Now
-
                     };
-                    
                     cnt4.Twypozyczenia.Add(wypo1);
-                  //  Console.WriteLine(((ObjectQuery)z6).ToTraceString());
+
+                    }
+
                     cnt4.SaveChanges();
                     w1_viewModel.VM_Wypozyczenium = new Wypozyczalnia_PlytContext().Twypozyczenia.ToList();
                     break;

@@ -29,9 +29,11 @@
 
                     <DockPanel>
 
-                        <Button x:Name="Btn_dodaj_w2" Content="Dodaj Plyte" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="50" Width="100" Click="Btn_dodaj_w2_Click" Background="WhiteSmoke" Margin="20,0,0,0" DockPanel.Dock="Right"/>
-                        <Button x:Name="Btn_usun_w3" Content="Usun Plyte" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100" Height="50" Click="Btn_usun_w3_Click" IsEnabled="False" Margin="0,0,0,0" DockPanel.Dock="Right"/>
-
+                        <StackPanel>
+                            <Button x:Name="Btn_dodaj_w2" Content="Dodaj nową Plyte" VerticalAlignment="Top" HorizontalAlignment="Center"  Height="50" Width="100" Click="Btn_dodaj_w2_Click" Background="WhiteSmoke" Margin="20,50,20,0" DockPanel.Dock="Right"/>
+                            <Button x:Name="Btn_dodaj_nowe_w5" Content="Dodaj Istniejacą" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Height="50" IsEnabled="False" Margin="20,100,20,0" DockPanel.Dock="Right" Click="Btn_dodaj_nowe_w5_Click"/>
+                            <Button x:Name="Btn_usun_w3" Content="Usun Plyte" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Height="50" Click="Btn_usun_w3_Click" IsEnabled="False" Margin="20,100,20,0" DockPanel.Dock="Right"/>
+                        </StackPanel>
 
                         <ListView x:Name="List_Plyty" SelectionMode="Single" ItemsSource="{Binding VM_Plyty, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="Plyty_SelectionChanged" Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"  BorderBrush="#FF8B919C" Foreground="#f5f5f5" FontSize="14" FontWeight="Normal">
                             <ListView.View>
@@ -45,6 +47,7 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
+
                     </DockPanel>
 
 
@@ -60,10 +63,10 @@
                     <DockPanel>
 
 
-                       
-                            <Button x:Name="Btn_wypo_w4" Content="Wyporzycz" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="50" Width="100" Click="Btn_wypo_w4_Click" Margin="50,20,20,0" DockPanel.Dock="Right"/>
-                            <Button x:Name="Btn_oddaj_w5" Content="Oddanie Wyporzyczenia" IsEnabled="False" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Height="45" Click="Btn_oddaj_w5_Click" Margin="100,20,0,0" DockPanel.Dock="Right"/>
-                       
+                        <StackPanel>
+                            <Button x:Name="Btn_wypo_w4" Content="Wyporzycz" VerticalAlignment="Center" HorizontalAlignment="Center"  Height="50" Width="100" Click="Btn_wypo_Click" Margin="20,20,20,0" DockPanel.Dock="Right"/>
+                            <Button x:Name="Btn_oddaj_w5" Content="Oddanie Wyporzyczenia" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="45" Click="Btn_oddaj_Click" Margin="20,80,20,0" DockPanel.Dock="Right"/>
+                        </StackPanel>
 
                         <ListView Grid.Column="5" x:Name="L_Wypozyczenia" SelectionMode="Single" ItemsSource="{Binding VM_Wypozyczenium , UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"  BorderBrush="#FF8B919C" Foreground="#f5f5f5" VerticalAlignment="Top" HorizontalAlignment="Stretch" FontSize="14" FontWeight="Normal" SelectionChanged="L_Wypozyczenia_SelectionChanged">
                             <ListView.View>
